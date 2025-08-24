@@ -9,9 +9,9 @@
 #include <random>
 
 // Constants for the simulation
-const float GRAVITY = 9.81f * 10.0f; // Exaggerated gravity for visibility
-const float RAINDROP_MIN_SIZE = 2.0f;
-const float RAINDROP_MAX_SIZE = 5.0f;
+const float GRAVITY = 9.81f * 100; // 9.81 m/s^2 assumes 1 pixel is a meter. We want it to be 100 pixels is a meter
+const float RAINDROP_MIN_SIZE = 0.5f;
+const float RAINDROP_MAX_SIZE = 1.5f;
 const int MAX_RAINDROPS = 500; // The maximum number of drops to simulate
 
 // A class to represent a single raindrop
@@ -80,12 +80,10 @@ public:
             }),
             drops.end());
 
-        // Continuously spawn new raindrops up to the maximum limit
-        //if (drops.size() < MAX_RAINDROPS) {
-            for (int i = 0; i < 5; ++i) { // Spawn a few drops at a time for a steady flow
+        for (int i = 0; i < 10; ++i) {
                 drops.emplace_back(windowSize);
-            }
-        //}
+        }
+
     }
 
     // Draws all raindrops
@@ -118,7 +116,6 @@ int main()
     // Get the window size for positioning other elements
     sf::Vector2u windowSize = window.getSize();
 
-    // Create an instance of our rain system
     RainSystem rainSystem(windowSize);
 
     // Use a clock to measure the time between frames for consistent physics
